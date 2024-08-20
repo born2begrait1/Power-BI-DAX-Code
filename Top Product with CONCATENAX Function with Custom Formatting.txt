@@ -1,0 +1,22 @@
+Top Product with CONCATENATEX = 
+VAR _TopProductTable = 
+                TOPN(1,
+                FILTER(dProducts,
+                [Total Profits]
+                ),[Total Profits])
+VAR _concat = 
+                CONCATENATEX(
+                    _TopProductTable,
+                    dProducts[Product])
+RETURN
+_concat
+.....................................................
+MAX Prod Profit = 
+VAR _MAXProductProfit = MAXX(
+                                all(dProducts[Product]),
+                                [Total Profits]
+)
+RETURN
+_MAXProductProfit
+...............................................................
+Line and Column Chart Title = "🥇"&"Profit: " & FORMAT([Total Profits], "£0,0.00") & " | " & "Profit %:" & FORMAT([Profit %], "00.0%")
