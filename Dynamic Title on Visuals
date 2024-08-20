@@ -1,0 +1,1 @@
+Line and Column Chart Title = "🥇"&"Profit: " & FORMAT([Total Profits], "£#,#") & " | " & "Profit %:" & FORMAT([Profit %], "#.#%")
