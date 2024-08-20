@@ -1,0 +1,51 @@
+Total Profits = 
+VAR _Total_Profits = SUMX(
+                            financials,
+                            financials[Profit]
+)
+RETURN
+_Total_Profits
+.................................................
+Profit % = 
+VAR _ProfitPercentage = DIVIDE(
+                                [Total Profits],
+                                CALCULATE([Total Profits],
+                                ALL(financials))
+)
+RETURN 
+_ProfitPercentage
+......................................................
+MAX Prod Profit = 
+VAR _MAXProductProfit = MAXX(
+                                all(dProducts[Product]),
+                                [Total Profits]
+)
+RETURN
+_MAXProductProfit
+.............................................................
+Values = {1,2,3,4,5,6} ---- Use this code to create New Table. The 1 to 6 represent the six products in the financial PowerBI Dataset. If you have more products list, increase the number as required
+
+.............................................................
+Top Selected Value = SELECTEDVALUE('Values'[Value],1) --Create these measure and then use it in the TOPN first argument in the code below to give dynamic selection from
+..............................................................
+Top 3 Products with CONCATENATEX = 
+VAR _TopProductTable = 
+                TOPN([Top Selected Value],
+                FILTER(dProducts,
+                [Total Profits]
+                ),[Total Profits])
+VAR _concat = 
+                CONCATENATEX(
+                    _TopProductTable,
+                    dProducts[Product] &" ✔ "& FORMAT([Total Profits], "£#,#"),
+                    UNICHAR(10),
+                    [Total Profits],DESC
+                ) & UNICHAR(10) & " ------- " & UNICHAR(10) &
+                "Total of Top 3 Products: " & FORMAT(
+                    CALCULATE(
+                [Total Profits],_TopProductTable), "£#,#")
+RETURN
+_concat
+
+......................................
+To visualize, you can use Date Hierarchy or any fields from your tables
