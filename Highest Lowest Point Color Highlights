@@ -1,0 +1,16 @@
+Highest/Lowest Color Highlights = 
+VAR _HIGHEST_POINT = MAXX(
+    ALLSELECTED(
+        dDate[Year - Month]) --change this to your desired X-axis, [Total Profits]
+)
+
+VAR _LOWEST_POINT = MINX(
+    ALLSELECTED(
+        dDate[Year - Month])--change this to your desired X-axis, [Total Profits]
+)
+RETURN
+SWITCH(
+    TRUE(),
+    _HIGHEST_POINT = [Total Profits], "GREEN",
+    _LOWEST_POINT = [Total Profits], "RED",
+    "GREY")
