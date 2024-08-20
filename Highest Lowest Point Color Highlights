@@ -14,3 +14,10 @@ SWITCH(
     _HIGHEST_POINT = [Total Profits], "GREEN",
     _LOWEST_POINT = [Total Profits], "RED",
     "GREY")
+
+
+Application: 
+Use column or line charts
+X_axis: Year - Month column
+Y_axis: Total_Profits (measure)
+In the Formatting of the chart, select Columns -> Color fx => Field Value => Based on: Highest/Lowest Color Highlights
