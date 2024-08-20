@@ -21,3 +21,5 @@ Use column or line charts
 X_axis: Year - Month column
 Y_axis: Total_Profits (measure)
 In the Formatting of the chart, select Columns -> Color fx => Field Value => Based on: Highest/Lowest Color Highlights
+
+
