@@ -1,0 +1,12 @@
+Top Product with CONCATENATEX = 
+VAR _TopProductTable = 
+                TOPN(1,
+                FILTER(dProducts,
+                [Total Profits]
+                ),[Total Profits])
+VAR _concat = 
+                CONCATENATEX(
+                    _TopProductTable,
+                    dProducts[Product])
+RETURN
+_concat
