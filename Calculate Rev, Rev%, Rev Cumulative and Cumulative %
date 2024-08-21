@@ -1,0 +1,41 @@
+
+
+1. Total Revenue = [Total Sales] - [Total Cost]
+...........................................................................................
+
+2. Rank of Year/Month = 
+VAR _RANK = IF(
+    ISINSCOPE(
+        dimDate[YearMonth]),
+        RANKX(
+            ALLSELECTED(dimDate[YearMonth]),
+        [Total Revenue]
+)
+)
+RETURN
+_RANK
+........................................................................................
+
+3. Total Revenue % = DIVIDE([1. Total Revenue],CALCULATE([1. Total Revenue],ALLSELECTED(fTransaction)))
+.........................................................................................
+
+4. Rev AllSelected = CALCULATE([1. Total Revenue],ALLSELECTED(fTransaction))
+....................................................................................................
+
+5. Revenue Cummulative = 
+IF(
+    ISINSCOPE(
+        dimDate[YearMonth]),
+        CALCULATE(
+            [1. Total Revenue],
+            TOPN(
+                [Rank of Year/Month],
+                ALLSELECTED(
+                    dimDate[YearMonth]),
+                    [1. Total Revenue]
+            )),
+            [3. Rev AllSelected]
+)
+...........................................................................................
+5. Revenue Cummulative % = 
+DIVIDE([5. Revenue Cummulative],[4. Rev AllSelected])
